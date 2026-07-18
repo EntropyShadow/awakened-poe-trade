@@ -1,5 +1,6 @@
 'use strict'
 
+import { ItemFileWatcher } from './host-files/ItemFileWatcher'
 import { app } from 'electron'
 import { uIOhook } from 'uiohook-napi'
 import os from 'node:os'
@@ -40,6 +41,7 @@ app.on('ready', async () => {
       const overlay = new OverlayWindow(eventPipe, logger, poeWindow)
       new OverlayVisibility(eventPipe, overlay, gameConfig)
       const shortcuts = await Shortcuts.create(logger, overlay, poeWindow, gameConfig, eventPipe)
+      const itemFileWatcher = new ItemFileWatcher(eventPipe, logger, overlay)
       eventPipe.onEventAnyClient('CLIENT->MAIN::update-host-config', (cfg) => {
         overlay.updateOpts(cfg.overlayKey, cfg.windowTitle)
         shortcuts.updateActions(cfg.shortcuts, cfg.stashScroll, cfg.logKeys, cfg.restoreClipboard, cfg.language)
@@ -49,6 +51,7 @@ app.on('ready', async () => {
         tray.overlayKey = cfg.overlayKey
       })
       uIOhook.start()
+      itemFileWatcher.start()
       const port = await startServer(appUpdater, logger)
       // TODO: move up (currently crashes)
       logger.write(`info ${os.type()} ${os.release} / v${app.getVersion()}`)

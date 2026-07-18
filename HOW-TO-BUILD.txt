@@ -1,0 +1,19 @@
+To run in dev mode:
+Terminal 1:
+	C:\src\awakened-poe-trade\renderer>npm run dev
+Terminal 2:
+	
+	
+-----------------
+To build release exe:
+	C:\src\awakened-poe-trade\renderer>npm run build
+	C:\src\awakened-poe-trade\main>npm run package
+	
+---------------
+POE 1 Files
+	path.join(app.getPath('documents'), 'My Games\\Path of Exile\\production_Config.ini')
+   'C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt',
+
+---------------
+How to start all necessary proceses
+	C:\src\awakened-poe-trade> runAll.bat

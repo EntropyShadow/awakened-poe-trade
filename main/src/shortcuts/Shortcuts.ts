@@ -167,6 +167,8 @@ export class Shortcuts {
 
           const pressPosition = screen.getCursorScreenPoint()
 
+this.logger.write(` [Shortcuts] copy-item Action Target: ${action.target}`)
+
           this.clipboard.readItemText()
             .then(clipboard => {
               this.areaTracker.removeListeners()

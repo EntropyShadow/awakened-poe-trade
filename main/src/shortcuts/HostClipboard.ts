@@ -106,6 +106,10 @@ function isPoeItem (text: string) {
   return LANGUAGE_DETECTOR.find(({ firstLine }) => text.startsWith(firstLine))
 }
 
+export function isPoeItemText (text: string): boolean {
+  return LANGUAGE_DETECTOR.some(({ firstLine }) => text.startsWith(firstLine))
+}
+
 const LANGUAGE_DETECTOR = [{
   lang: 'en',
   firstLine: 'Item Class: '

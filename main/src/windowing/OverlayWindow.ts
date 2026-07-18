@@ -38,6 +38,7 @@ export class OverlayWindow {
         spellcheck: false
       }
     })
+    this.logger.write('[OverlayWindow] Browser Created.')
 
     this.window.setMenu(Menu.buildFromTemplate([
       { role: 'editMenu' },
@@ -59,6 +60,8 @@ export class OverlayWindow {
   loadAppPage (port: number) {
     const url = process.env.VITE_DEV_SERVER_URL ||
       `http://localhost:${port}/index.html`
+
+    this.logger.write(`[OverlayWindow] Page URL: ${url}`)
 
     if (!this.window) {
       shell.openExternal(url)
@@ -121,6 +124,8 @@ export class OverlayWindow {
     else if (ctrlKey) code = `Ctrl + ${code}`
     else if (shiftKey) code = `Shift + ${code}`
 
+    this.logger.write(`[OverlayWindow] handleExtraCommands ${code}.`)
+
     switch (code) {
       case 'Escape':
       case 'Ctrl + W': {
@@ -138,7 +143,7 @@ export class OverlayWindow {
 
   private handleOverlayAttached = (hasAccess?: boolean) => {
     if (hasAccess === false) {
-      this.logger.write('error [Overlay] PoE is running with administrator rights')
+      this.logger.write('error [OverlayWindow] PoE is running with administrator rights')
 
       dialog.showErrorBox(
         'PoE window - No access',
@@ -148,6 +153,8 @@ export class OverlayWindow {
         'You need to restart Awakened PoE Trade with administrator rights.'
       )
     } else {
+      this.logger.write('[OverlayWindow] overlay-attached')
+
       this.server.sendEventTo('broadcast', {
         name: 'MAIN->OVERLAY::overlay-attached',
         payload: undefined
@@ -159,6 +166,8 @@ export class OverlayWindow {
     if (isActive && this.isInteractable) {
       this.isInteractable = false
     }
+    this.logger.write(`[OverlayWindow] focus-change active: ${isActive}, overlay isInteractable: ${this.isInteractable}, usingHotkey: ${this.isOverlayKeyUsed}`)
+
     this.server.sendEventTo('broadcast', {
       name: 'MAIN->OVERLAY::focus-change',
       payload: {
