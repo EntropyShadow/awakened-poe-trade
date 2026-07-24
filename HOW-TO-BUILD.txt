@@ -17,3 +17,5 @@ POE 1 Files
 ---------------
 How to start all necessary proceses
 	C:\src\awakened-poe-trade> runAll.bat
+	
+-----------------
