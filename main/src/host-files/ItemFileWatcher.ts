@@ -154,9 +154,12 @@ export class ItemFileWatcher {
         focusOverlay: true
       }
     })
-
-    if (this.overlay.wasUsedRecently) {
+this.logger.write(`[ItemFileWatcher] Sent`)
       this.overlay.assertOverlayActive()
-    }
+this.logger.write(`[ItemFileWatcher] assertOverlayActive`)
+
+    // if (this.overlay.wasUsedRecently) {
+    //   this.overlay.assertOverlayActive()
+    // }
   }
 }

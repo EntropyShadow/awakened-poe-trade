@@ -100,11 +100,11 @@ Files marked as both modified contain conflicts.
 Git inserts markers like:
 
 ```text
-<<<<<<< HEAD
+< < < < < < < HEAD
 your code
 =======
 upstream code
->>>>>>> upstream/master
+> > > > > > > upstream/master
 ```
 
 Edit the file so it contains the final desired code.
